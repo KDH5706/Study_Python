@@ -1,0 +1,23 @@
+from flask import Flask
+import RPi.GPIO as GPIO
+
+led = 12
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(led, GPIO.OUT)
+
+app = Flask(__name__)
+
+@app.route('/')
+@app.route('/home/<led_state>')
+
+def home(led_state):
+	if led_state == 'on' :
+		GPIO.output(led, True)
+	elif led_state == 'off':
+		GPIO.output(led, False)
+		return text
+
+if __name__ == '__main__':
+    app.run(host = '0.0.0.0', debug = True)
